@@ -59,10 +59,7 @@ namespace BinaryPuzzleSolver
                         if (AreGridsSame(resulting_grid, solution_grid)) Console.WriteLine($"Passed size: {size} level: {level} puzzleno: {puzzleno}");
                         else
                         {
-                            Console.WriteLine("Resulting Grid");
-                            PrintGrid(resulting_grid);
-                            Console.WriteLine("Solution Grid");
-                            PrintGrid(solution_grid);
+                            ShowDifferences(resulting_grid, solution_grid);
                             failed = true;
                         }
                     }
@@ -70,6 +67,42 @@ namespace BinaryPuzzleSolver
             }
 
             Console.ReadKey();
+        }
+
+        private static void ShowDifferences(List<List<char>> resulting_grid, List<List<char>> solution_grid)
+        {
+            Console.WriteLine("\nResulting Grid\n");
+            for (int yindex = 0; yindex < resulting_grid.Count; yindex++)
+            {
+                for (int xindex = 0; xindex < resulting_grid[yindex].Count; xindex++)
+                {
+                    if (resulting_grid[yindex][xindex] != solution_grid[yindex][xindex])
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    Console.Write($"{resulting_grid[yindex][xindex]}");
+                    Console.ResetColor();
+                    Console.Write(" ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("\nSolution Grid\n");
+            for (int yindex = 0; yindex < solution_grid.Count; yindex++)
+            {
+                for (int xindex = 0; xindex < solution_grid[yindex].Count; xindex++)
+                {
+                    if (solution_grid[yindex][xindex] != resulting_grid[yindex][xindex])
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    Console.Write($"{solution_grid[yindex][xindex]}");
+                    Console.ResetColor();
+                    Console.Write(" ");
+                }
+                Console.WriteLine();
+            }
         }
 
         static void PrintGrid(List<List<char>> grid)
