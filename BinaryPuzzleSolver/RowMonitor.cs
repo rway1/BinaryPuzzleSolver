@@ -49,6 +49,8 @@ namespace BinaryPuzzleSolver
                     if (cellParameter.Value == '-') cellParameter.Value = ValueToUse;
                 }
             }
+
+            //finds potential
             if (CellParameters.Count/2 - OneCount == 1 || CellParameters.Count/2 - ZeroCount == 1)
             {
                 char ToFindTrippletOf = CellParameters.Count / 2 - OneCount == 1 ? '0' : '1';
