@@ -49,6 +49,34 @@ namespace BinaryPuzzleSolver
                     if (cellParameter.Value == '-') cellParameter.Value = ValueToUse;
                 }
             }
+            if (CellParameters.Count/2 - OneCount == 1 || CellParameters.Count/2 - ZeroCount == 1)
+            {
+                char ToFindTrippletOf = CellParameters.Count / 2 - OneCount == 1 ? '0' : '1';
+                int beginSub = -1;
+                int subLength = 0;
+                int endSub = -1;
+                for (int index = 0; index < CellParameters.Count; index++)
+                {
+                    if (CellParameters[index].Value == ToFindTrippletOf || CellParameters[index].Value == '-') subLength++;
+                    else subLength = 0;
+                    if (subLength == 3)
+                    {
+                        beginSub = index - subLength+1;
+                        endSub = index;
+                        break;
+                    }
+                }
+                if (beginSub != -1 && endSub != -1)
+                {
+                    for (int index = 0; index < CellParameters.Count; index++)
+                    {
+                        if (CellParameters[index].Value == '-' && (index < beginSub || index > endSub))
+                        {
+                            CellParameters[index].Value = ToFindTrippletOf;
+                        }
+                    } 
+                }
+            }
         }
     }
 }
